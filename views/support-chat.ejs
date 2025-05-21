@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro" />
+  <link rel="stylesheet" href="/css/support-chat.css" />
+  <title>IWAdmin</title>
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <%- include('partials/popmsg') %>
+  <h1>Chat with <%= messages[0]?.user?.fullname || "User" %></h1>
+
+  <div class="chat-box">
+    <% messages.forEach(msg => { %>
+      <div class="chat-message <%= msg.isAdmin ? 'admin' : 'user' %>">
+        <p><%= msg.message %></p>
+        <span><%= new Date(msg.createdAt).toLocaleString() %></span>
+      </div>
+    <% }) %>
+  </div>
+
+  <form class="reply-form" method="POST" action="/support/<%= userId %>">
+    <textarea name="message" required placeholder="Type your reply..."></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <script src="/js/support-chat.js"></script>
+</body>
+</html>

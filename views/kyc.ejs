@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro" />
+  <link rel="stylesheet" href="/css/kyc.css" />
+  <title>IWAdmin</title>
+</head>
+
+<body>
+  <%- include('partials/nav') %>
+  <%- include('partials/popmsg') %>
+  <div class="button-container">
+    <button onclick="showContainer(1)">Pending Requests</button>
+    <button onclick="showContainer(2)">Approved Requests</button>
+    <button onclick="showContainer(3)">Search By Number</button>
+  </div>
+
+  <div class="main">
+    <div id="container1" class="container">
+
+      <div class="container-kyc-pending">
+        <h2>Pending KYC</h2>
+    
+        <% if (kycsPending.length === 0) { %>
+          <p>No pending KYC found.</p>
+        <% } else { %>
+          <% kycsPending.forEach(kyc => { %>
+            <div class="card">
+              <a href="<%= kyc.imageUrl %>"><img src="<%= kyc.imageUrl %>" alt="KYC Image" /></a>
+              <div class="details">
+                <p><strong>Name:</strong> <a href="/user/<%= kyc.user._id %>"> <%= kyc.user.fullname %></a></p>
+                <p><strong>Email:</strong> <%= kyc.user.email %></p>
+                <p><strong>Phone:</strong> <%= kyc.user.phone %></p>
+                <form method="POST" action="/kyc/approve/<%= kyc._id %>">
+                  <button type="submit" class="btn">Approve</button>
+                </form>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+      
+    </div>
+
+    <div id="container2" class="container">
+      
+      <div class="container-kyc-approved">
+        <h2>Approved KYC</h2>
+    
+        <% if (kycsApproved.length === 0) { %>
+          <p>No approved KYC found.</p>
+        <% } else { %>
+          <% kycsApproved.forEach(kyc => { %>
+            <div class="card">
+              <a href="<%= kyc.imageUrl %>"><img src="<%= kyc.imageUrl %>" alt="KYC Image" /></a>
+              <div class="details">
+                <p><strong>Name:</strong> <a href="/user/<%= kyc.user._id %>"> <%= kyc.user.fullname %></a></p>
+                <p><strong>Email:</strong> <%= kyc.user.email %></p>
+                <p><strong>Phone:</strong> <%= kyc.user.phone %></p>
+                <form method="POST" action="/kyc/delete/<%= kyc._id %>">
+                  <button type="submit" class="btn">Delete</button>
+                </form>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+      
+      
+    </div>
+
+    <div id="container3" class="container">
+
+      <div class="container-kyc-search">
+        <h2>Check KYC Status</h2>
+        <input type="text" id="phoneInput" placeholder="Enter phone number" />
+        <button onclick="checkKYC()">Check</button>
+    
+        <div class="result" id="resultBox"></div>
+      </div>
+      
+      
+    </div>
+  </div>
+<script>async function checkKYC() {
+  const phone = document.getElementById("phoneInput").value.trim();
+  const resultBox = document.getElementById("resultBox");
+
+  if (!phone) {
+    resultBox.innerHTML = "<p style='color:red;'>Please enter a phone number.</p>";
+    return;
+  }
+
+  try {
+    const res = await fetch(`/kyc/check/${phone}`);
+    const data = await res.json();
+
+    if (data.status === 'not_found' || data.status === 'no_kyc') {
+      resultBox.innerHTML = `<p style="color:red;">${data.message}</p>`;
+    } else {
+      resultBox.innerHTML = `
+        <p><strong>Name:</strong> ${data.fullname}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Phone:</strong> ${data.phone}</p>
+        <p><strong>Status:</strong> ${data.status === 'approved' ? '✅ Approved' : '⏳ Pending'}</p>
+        <img src="${data.imageUrl}" alt="KYC Image" />
+      `;
+    }
+  } catch (err) {
+    resultBox.innerHTML = `<p style="color:red;">Server error. Please try again later.</p>`;
+  }
+}</script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("✅ jQuery is working!");
+        });
+    </script>
+  <script src="/js/kyc.js"></script>
+</body>
+</html>

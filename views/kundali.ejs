@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro" />
+  <link rel="stylesheet" href="/css/kundali.css" />
+  <title>IWAdmin</title>
+</head>
+<body>
+
+  <%- include('partials/nav') %>
+  <%- include('partials/popmsg') %>
+
+  <div class="kundali-container">
+    <% matches.forEach(match => { %>
+      <div class="kundali-card">
+        <h3>Request by: <a href="/user/<%= match.requesterId %>"><%= match.requesterName %></a></h3>
+        <p><a href="/user/<%= match.matchWithId%>">Match with: <%= match.matchWithName %></a></p>
+        <p>Date: <%= new Date(match.requestedAt).toLocaleString() %></p>
+  
+        <% if (match.pdfLink) { %>
+          <p>Status: ✅ Approved</p>
+          <a href="<%= match.pdfLink %>" target="_blank" class="pdf-btn">View PDF</a>
+        <% } else { %>
+          <form method="POST" action="/kundali-approve/<%= match._id %>">
+            <input type="text" name="pdfLink" placeholder="Enter PDF Link" required />
+            <button type="submit">Approve</button>
+          </form>
+        <% } %>
+      </div>
+    <% }) %>
+  </div>
+  
+  
+
+  <script src="/js/kundali.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro" />
+  <link rel="stylesheet" href="/css/promo-info.css" />
+  <title>IWAdmin</title>
+</head>
+
+<body>
+  <%- include('partials/nav') %>
+  <%- include('partials/popmsg') %>
+  <div class="button-container">
+    <button onclick="showContainer(1)">Create Promo Code</button>
+    <button onclick="showContainer(2)">Send Promo Code</button>
+    <button onclick="showContainer(3)">Promo Code Info</button>
+  </div>
+
+  <div class="main">
+    <div id="container1" class="container">
+      <form action="/create-promocode" method="POST" style="width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; box-sizing: border-box;">
+        <h2 style="margin-bottom: 1rem;">Create Promo Code</h2>
+      
+        <label for="code" style="width: 100%; max-width: 300px;">Promo Code:</label>
+        <input type="text" id="code" name="code" required style="width: 100%; max-width: 300px; margin-bottom: 1rem; padding: 0.5rem;">
+      
+        <label for="discount" style="width: 100%; max-width: 300px;">Discount (%):</label>
+        <input type="number" min="10"  max="90" id="discount" name="discount" required style="width: 100%; max-width: 300px; margin-bottom: 1rem; padding: 0.5rem;">
+      
+        <button type="submit" style="padding: 0.5rem 1rem; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Create</button>
+      </form>
+    </div>
+
+    <div id="container2" class="container">
+      <form action="/send-promo" method="POST">
+        <div class="prcontainer">
+          
+          <!-- Select Plan -->
+          <label for="plan">Select Plan:</label>
+          <select name="planName" id="plan" required>
+            <% plans.forEach(plan => { %>
+              <option value="<%= plan.name %>"><%= plan.name %></option>
+            <% }) %>
+          </select>
+      
+          <!-- Select Promo Code -->
+          <label for="promoCode">Select Promo Code:</label>
+          <select name="code" id="promoCode" required>
+            <% promoCodes.forEach(code => { %>
+              <option value="<%= code.code %>"><%= code.code %> - <%= code.discount %>% OFF</option>
+            <% }) %>
+          </select>
+        
+          <button type="submit">Send</button>
+        </div>
+      </form>
+      
+      
+    </div>
+
+    <div id="container3" class="container">
+      <% promoCodes.forEach(promo => { %>
+        <div class="promo-box">
+          <p><%= promo.code %> - <%= promo.discount %>% OFF (<%= promo.usedCount %> times)</p>
+        <div class="users">
+          <% promo.usageDetails.forEach(use => { %>
+            
+            <div class="user">
+              <a href="/user/<%= use.userId %>">
+                User: <%= use.userName %><br>
+                Plan: <%= use.plan.name %> - ₹<%= use.plan.price %><br>
+                Used At: <%= new Date(use.usedAt).toLocaleString() %>
+              </a>
+            </div>
+
+            
+            
+          <% }) %>
+        </div>
+          
+        
+        </div>
+      <% }) %>
+    </div>
+  </div>
+  <script src="/js/promo-info.js"></script>
+</body>
+</html>

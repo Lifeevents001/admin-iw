@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro" />
+  <link rel="stylesheet" href="/css/support.css" />
+  <title>IWAdmin</title>
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <%- include('partials/popmsg') %>
+  <h1>Support Messages</h1>
+  <ul class="user-list">
+    <% users.forEach(user => { %>
+      <li>
+        <a href="/support/<%= user._id %>">
+          <%= user.fullname %> - <%= user.email %> - <%= user.phone %>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+
+  <script src="/js/support.js"></script>
+</body>
+</html>

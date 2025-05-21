@@ -1,0 +1,23 @@
+<% if (messages.error) { %>
+  <div class="alert alert-error" id="popup">
+    <i class="fa-solid fa-check"></i>
+    <%= messages.error %>
+    <span id="close-btn">X</span>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      const popup = document.getElementById("popup");
+      if (popup) {
+        popup.style.display = "none";
+      }
+    }, 8000);
+
+    document.getElementById("close-btn").addEventListener("click", () => {
+      const popup = document.getElementById("popup");
+      if (popup) {
+        popup.style.display = "none";
+      }
+    });
+  </script>
+<% } %>

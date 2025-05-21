@@ -1,0 +1,38 @@
+<div class="nav-bar">
+  <div class="nav-bar-left">
+    <a href="/">IWAdmin</a>
+  </div>
+  <div class="nav-bar-right">
+   
+    <div class="menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  
+</div>
+<div class="menu-option">
+  <div class="menu-option-bottom">
+    <a href="/promo-code">Promo-code</a>
+   <a href="/download-users">Download-Users</a>
+   <a href="/revenue">Revenue</a>
+   <a href="/support">Support Chat</a>
+   <a href="/coordinator">Create Cordinator</a>
+   <a href="/kundali-requests">Kundali Requests</a>
+   <a href="/success-stories">Sucess Stories</a>
+   <a href="/kyc-details">Kyc Details</a>
+   <a href="/logout">Logout</a>
+  </div>
+</div>
+<script>
+  const menu = document.querySelector(".menu");
+const menuOption = document.querySelector(".menu-option");
+
+menu.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    menuOption.classList.toggle("active");
+});
+
+
+</script>

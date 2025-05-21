@@ -1,0 +1,153 @@
+/* Reset and Global Styles */
+
+/* Success Stories Section */
+.success-stories {
+  width: 100vw;
+  height: 100vh; /* Full height */
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* Heading Section */
+.success-header {
+  text-align: center;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  background: inherit;
+  z-index: 10;
+}
+
+.success-header h2 {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-header p {
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+/* Stories Container (Scrollable Area) */
+.stories-container {
+  flex: 1;
+  overflow-y: auto; /* Scrolls when needed */
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Individual Story Card */
+.story {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.story:hover {
+  transform: translateY(-5px);
+}
+
+.story img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.story h3 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #ff758c;
+}
+
+.story p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 5px;
+}
+
+/* Custom Scrollbar */
+.stories-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.stories-container::-webkit-scrollbar-thumb {
+  background: #ff758c;
+  border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .success-header h2 {
+      font-size: 1.5rem;
+  }
+  .success-header p {
+      font-size: 0.9rem;
+  }
+  .stories-container {
+      padding: 10px;
+  }
+  .story {
+      width: 90%;
+  }
+}
+
+@media (max-width: 320px) {
+  .success-header h2 {
+      font-size: 1.3rem;
+  }
+  .success-header p {
+      font-size: 0.8rem;
+  }
+  .story {
+      width: 100%;
+  }
+}
+
+.story p span{
+
+  width: 240px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+}
+.approve{
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
+  background-color: green;
+  color: #fff;
+}
+.reject{
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  background-color: red;
+  color: #fff;
+}

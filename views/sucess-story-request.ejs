@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Crimson+Pro"
+  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/css/sucess-story-request.css" />
+  <link rel="icon" type="image/png" href="/images/iw5.png" />
+  <title>IWAdmin</title>
+</head>
+<body>
+  <%- include('partials/popmsg') %> <%- include('partials/nav') %>
+
+    <section class="success-stories">
+        <p style="color: #fff; border: 1px solid #fff; width: 200px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 10px;"><a href="/sucess-story-available" style="color: #fff;">See Available Stories</a></p>
+        <div class="stories-container">
+          <% pendingStories.forEach(story => { %>
+            <div class="story">
+              <a href="/user/<%= story.user._id %>"><img src="<%= story.image %>" alt="Couple"></a>
+              <h3><%= story.name %> & <%= story.partnerName %></h3>
+              <p><strong>Name</strong>: <%= story.name %>, <br> <strong>Requester-Phone</strong>:<%= story.user.phone %>  <br> <strong>Partner Name</strong>: <%= story.partnerName %> , <br>  "   
+                <strong>Partner Phone Number</strong>:<%= story.partnerPhone %>, <br>  <strong>quote</strong>:<%= story.quote %>"</p>
+              <span>
+                <form method="POST" action="/success-story/approve/<%= story._id %>" style="display:inline;">
+                  <button type="submit" class="approve">Approve</button>
+                </form>
+        
+                <form method="POST" action="/success-story/reject/<%= story._id %>" style="display:inline;">
+                  <button type="submit" class="reject">Reject</button>
+                </form>
+              </span>
+            </div>
+          <% }) %>
+
+        </div>
+    </section>
+</body>
+</html>

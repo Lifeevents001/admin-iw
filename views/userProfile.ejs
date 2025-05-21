@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/header') %>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro"
+    />
+    <link rel="stylesheet" href="/css/userProfile.css" />
+    <title>IWAdmin</title>
+  </head>
+  <body>
+    <%- include('partials/popmsg') %> <%- include('partials/nav') %>
+    <div class="main">
+      <% if (user.images && user.images.length > 0) { %>
+      <%user.images.forEach((image, index) => { %>
+
+      <div
+        class="main-top"
+        id="image-<%= index %>"
+        data-images="<%= JSON.stringify(user.images || []) %>"
+      >
+        <div class="main-top-top" style="background-image: url('<%= image %>')">
+          
+          <div class="left-button"><i class="fa-solid fa-arrow-left"></i></div>
+          <div class="right-button">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+          <div class="count-image"><%=index%></div>
+          <img src="<%= image %>" alt="" />
+          
+
+          
+        </div>
+
+        <div class="main-top-bottom">
+          <div class="profile-img">
+            <img src="<%=user.images[0]%>" alt="">
+          </div>
+          <div class="profile-name">
+            <%=user.fullname %><% if (user.kyc) { %>
+              <img src="/images/verify.png" alt="Verified">
+          <% } %>
+          
+          </div>
+          <div class="profile-options">
+              <div class="option-data">
+                <p class="likes">
+                  <button id="sendInterest" ">
+                      <i class="fa-solid fa-thumbs-up"></i>
+                  </button>
+                  <span id="interestCount"><%= user.interests ? user.interests.length : 0 %></span>
+              </p>
+              
+              <p class="intrest">
+                  <button id="sendSuperInterest" >
+                      <i class="fa-solid fa-heart"></i>
+                  </button>
+                  <span id="superInterestCount"><%= user.superInterests ? user.superInterests.length : 0 %></span>
+              </p>
+                   <p class="views"><i class="fa-solid fa-eye"></i><span><%= user.views %></span></p>
+              </div>
+              <div class="option-buttons">
+                    <p class="tab-btn active" data-target="basic-details">Basic-Details</p>
+                    <p class="tab-btn" data-target="educational-details">Educational-Details</p>
+                    <p class="tab-btn" data-target="family-details">Family-Details</p>
+              </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <% }) %> <% } else { %>
+
+      <div class="main-top">
+        <div
+          class="main-top-top"
+          style="
+            background-image: url('/images/profile.jpg');
+          "
+        >
+          <img
+            src="/images/profile.jpg"
+            alt=""
+          />
+          
+        </div>
+
+        <div class="main-top-bottom">
+
+          <div class="profile-img">
+            <img src="/images/profile.jpg" alt="">
+          </div>
+          <div class="profile-name">
+            <%=user.fullname %> <%=user.fullname %> <% if (user.kyc) { %>
+              <img src="/images/verify.png" alt="Verified">
+          <% } %>
+          
+          </div>
+          <div class="profile-options">
+              <div class="option-data">
+                <p class="likes">
+                  <button id="sendInterest" data-user-id="<%= user._id.toString() %>">
+                      <i class="fa-solid fa-thumbs-up"></i>
+                  </button>
+                  <span id="interestCount"><%= user.interests ? user.interests.length : 0 %></span>
+              </p>
+              
+              <p class="intrest">
+                  <button id="sendSuperInterest" data-user-id="<%= user._id.toString() %>">
+                      <i class="fa-solid fa-heart"></i>
+                  </button>
+                  <span id="superInterestCount"><%= user.superInterests ? user.superInterests.length : 0 %></span>
+              </p>
+                   <p class="views"><i class="fa-solid fa-eye"></i><span><%= user.views %></span></p>
+              </div>
+              <div class="option-buttons">
+                    <p class="tab-btn active" data-target="basic-details">Basic-Details</p>
+                    <p class="tab-btn" data-target="educational-details">Educational-Details</p>
+                    <p class="tab-btn" data-target="family-details">Family-Details</p>
+              </div>
+          </div>
+
+        </div>
+      </div>
+
+      <% } %>
+
+      <div class="main-bottom">
+        <div class="tab-content basic-details active">
+          <div class="tab-content-container">
+            <div class="basic-details-container">
+              <div>
+                <h1>
+                  Basic-Details
+                </h1>
+                <p>Brief outline of personal information</p>
+              </div>
+              
+            </div>
+              <div class="basic-details-content-container">
+                     <div><span><i class="fa-solid fa-cake-candles"></i></span><span><%= user.day ? user.day : "Not Available" %>:<%=user.month%>:<%=user.year%></span></div>
+                     <div>
+                      <span><i class="fa-solid fa-ring"></i></span><span><%= user.maritalStatus ? user.maritalStatus : "Not Available" %></span>
+                     </div>
+                     <div><span><i class="fa-solid fa-hands-praying"></i></span><%= user.religion ? user.religion : "Not Available" %> - <%= user.cast ? user.cast : "Not Available" %><span></span></div>
+                     <div><span><i class="fa-solid fa-language"></i></span><span><%= user.motherTongue ? user.motherTongue : "Not Available" %></span></div>
+                     <div><span><i class="fa-solid fa-location-dot"></i></span><span><%= user.country ? user.country : "Not Available" %>  <%= user.City ? user.City : "Not Available" %></span></div>
+                     
+                     <div><span><i class="fa-solid fa-wallet"></i></span><span><%= user.annualIncome ? user.annualIncome : "Not Available" %> Lakhs /Year</span></span></div>
+                     
+                     <div><span><i class="fa-solid fa-ruler-vertical"></i></span><span><%= user.height ? user.height : "Not Available" %></span></div>
+                     
+
+              </div>
+          </div>
+          <div class="tab-content-container">
+            <div class="basic-details-container">
+              <div>
+                <h1>
+                  About-me
+                </h1>
+                <p>Brief outline of personal information</p>
+              </div>
+              
+            </div>
+              <div class="basic-details-content-container">
+                     <div><span></span><span><%= user.expressYourself ? user.expressYourself : "Not Available" %></span></div>
+
+              </div>
+          </div>
+          <div class="tab-content-container">
+            <div class="basic-details-container">
+              <div>
+                <h1>
+                  Kundli and Astro
+                </h1>
+                <p>These Details help increase chances of compatibility</p>
+              </div>
+              
+            </div>
+              <div class="basic-details-content-container">
+                     <div><span><i class="fa-solid fa-star-of-david"></i></span><span><%= user.manglikStatus ? user.manglikStatus : "Not Available" %></span></div>
+                     <p>Horscope Match : <%= user.horoscopicMatch ? user.horoscopicMatch : "Not Available" %></p>
+
+              </div>
+          </div>
+          <div class="tab-content-container">
+            <div class="basic-details-container">
+              <div>
+                <h1>
+                  Contact Details
+                </h1>
+                <p>Details that would help profiles get in touch with you</p>
+              </div>
+              
+            </div>
+              <div class="basic-details-content-container">
+
+                  <div>
+                      <span><i class="fa-solid fa-envelope"></i></span>
+                      <span><%= user.email ? user.email : "Not Available" %></span>
+                  </div>
+                  <div>
+                      <span><i class="fa-solid fa-phone"></i></span>
+                      <span><%= user.phone ? user.phone : "Not Available" %></span>
+                  </div>
+                  
+                
+                
+              
+
+              </div>
+          </div>
+          <div class="tab-content-container">
+            <div class="basic-details-container">
+              <div>
+                <h1>
+                  Career
+                </h1>
+                <p>Give a glimpse of your Professional Life</p>
+              </div>
+              
+            </div>
+              <div class="basic-details-content-container">
+                <div><span><i class="fa-solid fa-briefcase"></i></span><span><%= user.occupation ? user.occupation : "Not Available" %> - <%= user.jobSector ? user.jobSector : "Not Available" %></span></div>
+
+              </div>
+          </div>
+        </div>
+        <div class="tab-content educational-details">
+          <div class="tab-content-container">
+            <div class="basic-details-container">
+              <div>
+                <h1>
+                  Educational-Details
+                </h1>
+                <p>Showcase your educational qualification</p>
+              </div>
+              
+            </div>
+              <div class="basic-details-content-container">
+                <div><span><i class="fa-solid fa-school"></i></span><span><%= user.degree ? user.degree : "Not Available" %></span></div>
+
+              </div>
+          </div>
+        </div>
+        <div class="tab-content family-details">
+          
+            <div class="tab-content-container">
+              <div class="basic-details-container">
+                <div>
+                  <h1>
+                    Family-Details
+                  </h1>
+                  <p>Introduce your family members, values and background</p>
+                </div>
+                
+              </div>
+                <div class="basic-details-content-container">
+                  <div><strong>Family-Type</strong><%= user.familyType ? user.familyType : "Not Available" %></div>
+                  <div><strong>Father-occupation</strong><%= user.fatheroccupationType ? user.fatheroccupationType : "Not Available" %></div>
+                  <div><strong>Mother-occupation</strong><%= user.motheroccupation ? user.motheroccupation : "Not Available" %></div>
+                  <div><strong>Number of Brothers</strong><%= user.brothers ? user.brothers : "Not Available" %></div>
+                  <div><strong>Number of Sisters</strong><%= user.sisters ? user.sisters : "Not Available" %></div>
+                  <div><strong>Number of Married Sisters</strong><%= user.marriedSisters ? user.marriedSisters : "Not Available" %></div>
+                  <div><strong>Number of Married Brothers</strong><%= user.marriedBrothers ? user.marriedBrothers : "Not Available" %></div>
+                  <div><strong>Family Living in</strong><%= user.familyLiving ? user.familyLiving : "Not Available" %></div>
+                </div>
+            </div>
+            <div class="tab-content-container">
+              <div class="basic-details-container">
+                <div>
+                  <h1>
+                    About-Family
+                  </h1>
+                  <p>Brief outline of Family information</p>
+                </div>
+                
+              </div>
+                <div class="basic-details-content-container">
+                       <div><span></span><span><%= user.aboutfamily ? user.aboutfamily : "Not Available" %></span></div>
+  
+                </div>
+            </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("✅ jQuery is working!");
+        });
+    </script>
+    
+    <script src="/js/userProfile.js"></script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro" />
+  <link rel="stylesheet" href="/css/cordinator.css" />
+  <title>IWAdmin</title>
+</head>
+
+<body>
+  <%- include('partials/nav') %>
+  <%- include('partials/popmsg') %>
+  <div class="button-container">
+    <button onclick="showContainer(1)">Create Cordinator</button>
+    <button onclick="showContainer(2)">Give Permission</button>
+    <button onclick="showContainer(3)">List Of Cordinator</button>
+  </div>
+
+  <div class="main">
+    <div id="container1" class="container">
+      <form action="/coordinator-create" method="POST" style="width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; box-sizing: border-box;">
+        <h2 style="margin-bottom: 1rem;">Create Cordinator</h2>
+      
+        <label for="code" style="width: 100%; max-width: 300px;">Full Name:</label>
+        <input type="text" id="code" name="fullname" required style="width: 100%; max-width: 300px; margin-bottom: 1rem; padding: 0.5rem;">
+      
+        <label for="discount" style="width: 100%; max-width: 300px;">Email</label>
+        <input type="email" min="10"  max="90" id="discount" name="email" required style="width: 100%; max-width: 300px; margin-bottom: 1rem; padding: 0.5rem;">
+
+        <label for="code" style="width: 100%; max-width: 300px;">Phone:</label>
+        <input type="number" id="code" name="phone" required style="width: 100%; max-width: 300px; margin-bottom: 1rem; padding: 0.5rem;">
+
+        <label for="code" style="width: 100%; max-width: 300px;">Password:</label>
+        <input type="text" id="code" name="password" required style="width: 100%; max-width: 300px; margin-bottom: 1rem; padding: 0.5rem;">
+      
+        <button type="submit" style="padding: 0.5rem 1rem; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Create</button>
+      </form>
+    </div>
+
+    <div id="container2" class="container">
+      <div class="container-form">
+        <h2>Update Coordinator Permissions</h2>
+        <form action="/coordinator-update-permissions" method="POST">
+          <label for="phone">Coordinator Phone:</label>
+          <input type="text" name="phone" id="phone" placeholder="Enter phone number" required />
+    
+          <div class="permissions">
+            <p><strong>Select Permissions:</strong></p>
+            <label><input type="checkbox" name="permissions" value="1" /> Zero Permission</label>
+            <label><input type="checkbox" name="permissions" value="2" /> KYC Details</label>
+            <label><input type="checkbox" name="permissions" value="3" /> Success Stories</label>
+            <label><input type="checkbox" name="permissions" value="4" /> Kundali Request</label>
+            <label><input type="checkbox" name="permissions" value="5" /> Support Chat</label>
+            <label><input type="checkbox" name="permissions" value="6" /> Revenue</label>
+            <label><input type="checkbox" name="permissions" value="7" /> Download Users</label>
+            <label><input type="checkbox" name="permissions" value="8" /> Promo Code</label>
+            <label><input type="checkbox" name="permissions" value="9" /> Create Coordinator</label>
+          </div>
+    
+          <button type="submit">Update Permissions</button>
+        </form>
+      </div>
+      
+      
+    </div>
+
+    <div id="container3" class="container">
+      <div class="container-cordinator">
+        <h2>Coordinator List</h2>
+    
+        <% if (coordinatorList.length === 0) { %>
+          <p>No coordinators found.</p>
+        <% } else { %>
+          <table>
+            <thead>
+              <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Permissions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% coordinatorList.forEach(coordinator => { %>
+                <tr>
+                  <td><%= coordinator.fullname %></td>
+                  <td><%= coordinator.email %></td>
+                  <td><%= coordinator.phone %></td>
+                  <td>
+                    <div class="permissions">
+                      <% coordinator.permissions.forEach(permission => { %>
+                        <span class="badge"><%= permission %></span>
+                      <% }); %>
+                    </div>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <script src="/js/cordinator.js"></script>
+</body>
+</html>

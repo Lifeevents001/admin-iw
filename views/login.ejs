@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro" />
+  <link rel="stylesheet" href="/css/login.css" />
+  <title>IWAdmin</title>
+</head>
+<body>
+  <div class="main">
+    <div class="form-container">
+      <p class="title">Login</p>
+      <form class="form" action="/login" method="post">
+        <div class="input-group">
+          <label for="phone">Phone Number</label>
+          <input type="number" name="phone" id="phone" placeholder="Enter phone number" required>
+        </div>        
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Enter Password" required>
+        </div>
+        <button type="submit" class="sign">Login</button>
+      </form>
+      
+    </div>
+  </div>
+
+</body>
+</html>

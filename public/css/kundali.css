@@ -1,0 +1,94 @@
+.kundali-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.kundali-card {
+  width: 300px;
+  max-width: 100%;
+  background: #fff5f5;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+.kundali-card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #c62828;
+}
+
+.kundali-card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.kundali-card form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kundali-card input[type="text"] {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.kundali-card button {
+  padding: 8px;
+  background-color: #2e7d32;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.kundali-card button:hover {
+  background-color: #1b5e20;
+}
+
+.pdf-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #1976d2;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.pdf-btn:hover {
+  background-color: #0d47a1;
+}
+
+/* Responsive: down to 280px */
+@media (max-width: 400px) {
+  .kundali-container {
+    padding: 10px;
+  }
+
+  .kundali-card {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .kundali-card h3 {
+    font-size: 16px;
+  }
+
+  .kundali-card p,
+  .kundali-card input,
+  .kundali-card button {
+    font-size: 13px;
+  }
+}

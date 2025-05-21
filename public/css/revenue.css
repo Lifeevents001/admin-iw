@@ -1,0 +1,44 @@
+
+    
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .total-box {
+      background-color: #007BFF;
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media(min-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #007BFF;
+    }
+
+    .card p {
+      margin: 0.3rem 0;
+    }
